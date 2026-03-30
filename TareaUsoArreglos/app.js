@@ -84,7 +84,7 @@ function agregarProductoNuevo(){
 
 function eliminarDelCarrito(producto){
     if(carrito.length === 0){
-        alert("El carrito esta vacio");
+        alert("El carrito esta vacio ");
     }else{
         let eliminar = prompt("Ingrese el numero del producto que desea eliminar del carrito");
         eliminar = parseInt(eliminar);
