@@ -1,0 +1,20 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "ejemplo de proyecto",
+  "keywords": [
+    "node",
+    "express",
+    "server"
+  ],
+  "license": "ISC",
+  "author": "CristianJZ",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
