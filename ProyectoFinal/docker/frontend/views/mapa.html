@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fleet Control - Real-time Monitoring</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .map-container {
+            height: calc(100vh - 64px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#dec29a",
+                      "surface-dim": "#dcd9db",
+                      "outline": "#76777d",
+                      "on-secondary-container": "#fefcff",
+                      "primary": "#000000",
+                      "background": "#fcf8fa",
+                      "on-primary-fixed": "#131b2e",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-highest": "#e4e2e4",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#7c839b",
+                      "on-tertiary-fixed": "#271901",
+                      "outline-variant": "#c6c6cd",
+                      "secondary-container": "#316bf3",
+                      "surface-bright": "#fcf8fa",
+                      "surface": "#fcf8fa",
+                      "tertiary": "#000000",
+                      "primary-fixed-dim": "#bec6e0",
+                      "inverse-surface": "#303032",
+                      "primary-container": "#131b2e",
+                      "surface-container": "#f0edef",
+                      "surface-container-high": "#eae7e9",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "secondary-fixed": "#dbe1ff",
+                      "tertiary-fixed": "#fcdeb5",
+                      "on-tertiary-container": "#98805d",
+                      "inverse-on-surface": "#f3f0f2",
+                      "on-background": "#1b1b1d",
+                      "tertiary-container": "#271901",
+                      "primary-fixed": "#dae2fd",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "inverse-primary": "#bec6e0",
+                      "secondary-fixed-dim": "#b4c5ff",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#00174b",
+                      "on-tertiary-fixed-variant": "#574425",
+                      "surface-tint": "#565e74",
+                      "on-secondary-fixed-variant": "#003ea8",
+                      "on-surface": "#1b1b1d",
+                      "secondary": "#0051d5",
+                      "surface-variant": "#e4e2e4",
+                      "surface-container-low": "#f6f3f5",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#45464d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "container-max": "1440px",
+                      "gutter": "16px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["Inter"],
+                      "mono-data": ["Inter"],
+                      "title-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background">
+<!-- Navigation Drawer -->
+<aside class="w-[280px] h-full fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest shadow-sm flex flex-col py-4 gap-2 z-50">
+<div class="px-6 py-4">
+<span class="font-headline-lg text-headline-lg font-bold text-primary dark:text-on-primary-fixed">Fleet Control</span>
+</div>
+<div class="flex items-center gap-3 px-6 py-4 mb-2">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img alt="Dispatcher Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged male dispatcher in a clean, modern corporate environment. He is wearing a crisp white shirt and a light headset, looking towards the camera with a confident, helpful expression. The background is a soft-focus office with blue lighting accents and minimalist decor, maintaining a high-tech corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB63yC_QgtU8R844wjdzKgSTeAG8ST5550qH-CJH9qkbA-19yBJxsTDuhkHQ_RzSQN_3EGYbk47Dww3VUWHf0C7Uxdmw4_StLbjrJQ--e2wd71xX0O_8v3ioNXqG4zZ_3538IRyIn5frppE1aHvq6vsdIx9MSx_4iLNgDsGjwsns7ocumQpTJmrWqk14v7d10KZZforEn_g-ETcu_N_TVkAPb0QzTnnRgBEK3LlTbKxE96iOjj19p9cwnP6fBZoRsrcW_m_fLixbHST"/>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Central Dispatch</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Shift Alpha-1</span>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<!-- Active Tab: Real-time Map -->
+<a class="bg-secondary-container dark:bg-secondary-fixed text-on-secondary-container dark:text-on-secondary-fixed rounded-lg mx-2 flex items-center gap-3 px-4 py-3 Active: opacity-90 scale-[0.99] transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-title-md text-title-md">Real-time Map</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 flex items-center gap-3 px-4 py-3 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="electric_rickshaw">electric_rickshaw</span>
+<span class="font-title-md text-title-md">Fleet Inventory</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 flex items-center gap-3 px-4 py-3 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-title-md text-title-md">Route History</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 flex items-center gap-3 px-4 py-3 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span class="font-title-md text-title-md">Dispatch Center</span>
+</a>
+<div class="mt-auto">
+<a class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 flex items-center gap-3 px-4 py-3 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-title-md text-title-md">Settings</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[280px] h-screen flex flex-col relative overflow-hidden">
+<!-- Top App Bar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant flex justify-between items-center w-full px-margin-desktop h-16 z-40 shrink-0">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container dark:hover:bg-surface-container-highest p-2 rounded-full Active: scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-on-primary-fixed" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg font-black text-primary dark:text-on-primary-fixed">Fleet Control</h1>
+</div>
+<!-- Unit ID Search Bar -->
+<div class="flex-1 max-w-md mx-8">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-full py-2 pl-10 pr-4 text-body-md focus:ring-2 focus:ring-secondary focus:border-secondary transition-all outline-none" placeholder="Search Unit ID (e.g. BX-102)" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="hover:bg-surface-container dark:hover:bg-surface-container-highest p-2 rounded-full Active: scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-on-primary-fixed" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Map Workspace -->
+<section class="flex-1 relative bg-surface-container-low overflow-hidden">
+<!-- Full Screen Map Background -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-[#e3e5e8]" data-location="Mexico City" style="">
+<img class="w-full h-full object-cover opacity-60 mix-blend-multiply" data-alt="A clean, high-resolution aerial light-themed map of a modern urban city grid with subtle street lines and minimal terrain details. The color palette is composed of soft whites, greys, and light blues, providing a neutral background for data visualization markers. The perspective is top-down, suitable for a professional transit monitoring dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW_OGLboJdhur0pyInKf_7uP043PrXAzmc8aHNaBIUsqSZjmm4Y_XUcgPKLO66pMcw8OKvhUK7ibwfaCPJr4_NGWfoBCXLnnpUWl8eJ8WwtMM73i-4BfvuDZglWw7lsbrj3oaP0uYMpahqiEIh4P33hwkBoS3rd8WWmMtLm1sWNlvFU4DJU--F-ROECUL6s1Gih7CdGqITUP6OzZ1wH-vrF0S7mXnPzaTpTvhuieLwT3h_gGiRdaYLuftzgt0cg1qakWbF8Lhhs9wQ"/>
+</div>
+</div>
+<!-- Custom Markers Overlay (Simulated) -->
+<div class="absolute inset-0 pointer-events-none z-10">
+<!-- Marker 1: Available -->
+<div class="absolute top-1/4 left-1/3 pointer-events-auto cursor-pointer group">
+<div class="flex flex-col items-center">
+<div class="bg-surface-container-lowest p-1 rounded-lg shadow-sm border border-outline-variant mb-1 flex items-center gap-1">
+<span class="font-mono-data text-[10px] text-on-surface">BX-402</span>
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+</div>
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<!-- Marker 2: Busy -->
+<div class="absolute top-1/2 left-2/3 pointer-events-auto cursor-pointer group">
+<div class="flex flex-col items-center">
+<div class="bg-surface-container-lowest p-1 rounded-lg shadow-sm border border-outline-variant mb-1 flex items-center gap-1">
+<span class="font-mono-data text-[10px] text-on-surface">BX-128</span>
+<div class="w-2 h-2 rounded-full bg-orange-500"></div>
+</div>
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<!-- Marker 3: Available -->
+<div class="absolute bottom-1/3 left-1/2 pointer-events-auto cursor-pointer group">
+<div class="flex flex-col items-center">
+<div class="bg-surface-container-lowest p-1 rounded-lg shadow-sm border border-outline-variant mb-1 flex items-center gap-1">
+<span class="font-mono-data text-[10px] text-on-surface">BX-091</span>
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+</div>
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<!-- Marker 4: Offline -->
+<div class="absolute top-1/3 left-1/4 pointer-events-auto cursor-pointer group opacity-60">
+<div class="flex flex-col items-center">
+<div class="bg-surface-container-lowest p-1 rounded-lg shadow-sm border border-outline-variant mb-1 flex items-center gap-1">
+<span class="font-mono-data text-[10px] text-on-surface">BX-215</span>
+<div class="w-2 h-2 rounded-full bg-gray-400"></div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-3xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+</div>
+<!-- UI Overlay Elements -->
+<!-- Quick Filter Chips -->
+<div class="absolute top-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-full font-label-sm shadow-md transition-all active:scale-95 flex items-center gap-2">
+<span>All</span>
+</button>
+<button class="bg-white text-on-surface px-4 py-2 rounded-full font-label-sm shadow-sm border border-outline-variant transition-all hover:bg-surface-container-high active:scale-95 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span>Available</span>
+</button>
+<button class="bg-white text-on-surface px-4 py-2 rounded-full font-label-sm shadow-sm border border-outline-variant transition-all hover:bg-surface-container-high active:scale-95 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-orange-500"></div>
+<span>Busy</span>
+</button>
+<button class="bg-white text-on-surface px-4 py-2 rounded-full font-label-sm shadow-sm border border-outline-variant transition-all hover:bg-surface-container-high active:scale-95 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-gray-400"></div>
+<span>Offline</span>
+</button>
+</div>
+<!-- Summary Stats Card -->
+<div class="absolute top-6 left-6 z-20">
+<div class="bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-outline-variant w-56">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider">Fleet Status</span>
+<span class="material-symbols-outlined text-secondary" data-icon="analytics">analytics</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-primary">42</span>
+<span class="font-body-md text-on-surface-variant">Active Units</span>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Available</span>
+<span class="font-mono-data text-on-surface">28</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">In Service</span>
+<span class="font-mono-data text-on-surface">14</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Controls -->
+<div class="absolute bottom-10 right-10 flex flex-col gap-4 z-20">
+<button class="w-12 h-12 bg-white rounded-full shadow-lg border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors active:scale-90">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<button class="w-12 h-12 bg-white rounded-full shadow-lg border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors active:scale-90">
+<span class="material-symbols-outlined" data-icon="remove">remove</span>
+</button>
+<button class="bg-secondary text-on-secondary px-5 py-3 rounded-full shadow-xl flex items-center gap-3 font-title-md hover:opacity-90 active:scale-95 transition-all group">
+<span class="material-symbols-outlined group-hover:rotate-180 transition-transform duration-500" data-icon="my_location">my_location</span>
+<span>Recenter</span>
+</button>
+</div>
+<!-- Unit Detail Overlay (Focused Unit Example) -->
+<div class="absolute bottom-6 left-6 z-20 max-w-sm w-full">
+<div class="bg-white p-4 rounded-xl shadow-2xl border-l-4 border-secondary flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-title-md text-title-md text-primary">Unit BX-402</h3>
+<p class="font-body-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span> Roberto G.
+                            </p>
+</div>
+<span class="bg-green-100 text-green-700 px-2 py-1 rounded-md font-label-sm">Available</span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-2">
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant">Battery</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-600 text-sm" data-icon="battery_full">battery_full</span>
+<span class="font-mono-data text-primary">88%</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant">Speed</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="speed">speed</span>
+<span class="font-mono-data text-primary">12 km/h</span>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-secondary text-on-secondary py-2 rounded-lg font-label-sm active:scale-[0.98] transition-transform">Assign Task</button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container active:scale-90 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chat">chat</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>

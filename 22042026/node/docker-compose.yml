@@ -1,0 +1,38 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      container_name: crudd_app
+      restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: crud_user
+      DB_PASSWORD: crud_pass
+      DB_NAME: crud_db
+      PORT: 3000
+    depends_on:
+      - db:
+          condition: service_healthy
+
+    db:
+      image: mysql:5.7
+      container_name: crudd_db
+      restart: unless-stopped
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: crud_db
+        MYSQL_USER: crud_user
+        MYSQL_PASSWORD: crud_pass
+      volumes:
+        - db_data:/var/lib/mysql
+      healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+        interval: 30s
+        timeout: 10s
+        retries: 5ima

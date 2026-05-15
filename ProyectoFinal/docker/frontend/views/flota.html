@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#dec29a",
+                    "surface-dim": "#dcd9db",
+                    "outline": "#76777d",
+                    "on-secondary-container": "#fefcff",
+                    "primary": "#000000",
+                    "background": "#fcf8fa",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#7c839b",
+                    "on-tertiary-fixed": "#271901",
+                    "outline-variant": "#c6c6cd",
+                    "secondary-container": "#316bf3",
+                    "surface-bright": "#fcf8fa",
+                    "surface": "#fcf8fa",
+                    "tertiary": "#000000",
+                    "primary-fixed-dim": "#bec6e0",
+                    "inverse-surface": "#303032",
+                    "primary-container": "#131b2e",
+                    "surface-container": "#f0edef",
+                    "surface-container-high": "#eae7e9",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#dbe1ff",
+                    "tertiary-fixed": "#fcdeb5",
+                    "on-tertiary-container": "#98805d",
+                    "inverse-on-surface": "#f3f0f2",
+                    "on-background": "#1b1b1d",
+                    "tertiary-container": "#271901",
+                    "primary-fixed": "#dae2fd",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#bec6e0",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#00174b",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "surface-tint": "#565e74",
+                    "on-secondary-fixed-variant": "#003ea8",
+                    "on-surface": "#1b1b1d",
+                    "secondary": "#0051d5",
+                    "surface-variant": "#e4e2e4",
+                    "surface-container-low": "#f6f3f5",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#45464d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "container-max": "1440px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "32px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Inter"],
+                    "mono-data": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Navigation Drawer (Shared Component) -->
+<aside class="w-[280px] h-full fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest shadow-sm flex flex-col py-4 gap-2 z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-on-primary-fixed">Fleet Control</h1>
+<div class="mt-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-outline-variant">
+<img alt="Dispatcher Profile" data-alt="A professional headshot of a dispatcher in a corporate setting. The lighting is soft and professional, with a clean office background. The man is wearing a modern business casual shirt, reflecting an authoritative yet agile tech personality. High-quality corporate photography style with a light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGTzu_xHlB1Fva4_7lMZ13Kef2IVtZhwD2Nm1BbiJcZWWU1gfakUtpqGE5OMDO9un2_1hM75PeQNhaDW9_nEzRY50bGHmC9d7fTSY6qCL2a-D-o4fq5pe4F9tlXuuXXHyxCSo86sBzLtdiALOcvugGtwaQMESrO1NRECXsz7tX6bblC4XD8Ams4fmboAzGkeYD4TSgGrYXYt9uodb02Y8oV0BZ3jhAtldonFx1g9gCGMZj4kseBRwyzNIfze57_0p8AvMdptd1W2Df"/>
+</div>
+<div>
+<p class="font-title-md text-title-md text-secondary dark:text-secondary-fixed">Central Dispatch</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Shift Alpha-1</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-title-md text-title-md">Real-time Map</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-secondary-fixed text-on-secondary-container dark:text-on-secondary-fixed rounded-lg mx-2 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">electric_rickshaw</span>
+<span class="font-title-md text-title-md">Fleet Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-title-md text-title-md">Route History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-title-md text-title-md">Dispatch Center</span>
+</a>
+<div class="mt-auto pt-4 border-t border-outline-variant mx-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-title-md text-title-md">Settings</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-[280px] min-h-screen">
+<!-- Top App Bar (Shared Component) -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container dark:hover:bg-surface-container-highest p-2 rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined text-primary dark:text-on-primary-fixed">menu</span>
+</button>
+<h2 class="font-headline-lg text-headline-lg font-black text-primary dark:text-on-primary-fixed">Fleet Inventory</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</span>
+<input class="block w-64 pl-10 pr-3 py-2 border border-outline-variant rounded-full bg-surface-container-low focus:ring-2 focus:ring-secondary focus:border-secondary transition-all font-body-md text-body-md" placeholder="Search Unit ID or Driver..." type="text"/>
+</div>
+<button class="hover:bg-surface-container dark:hover:bg-surface-container-highest p-2 rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined text-primary dark:text-on-primary-fixed">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-margin-desktop space-y-6">
+<!-- Filters & Sorting Bar -->
+<section class="flex flex-wrap items-center justify-between gap-4 bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Filter by:</span>
+<div class="flex gap-2">
+<button class="px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm border border-secondary transition-colors">All Units</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-outline-variant transition-colors">Available</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-outline-variant transition-colors">In Use</button>
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm hover:bg-outline-variant transition-colors">Charging</button>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Sort:</span>
+<select class="bg-transparent font-title-md text-body-md border-none focus:ring-0 cursor-pointer">
+<option>Status: All</option>
+<option>Battery: High to Low</option>
+<option>Battery: Low to High</option>
+<option>Unit ID: Ascending</option>
+</select>
+</div>
+</section>
+<!-- Inventory List Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Unit Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-all duration-200 group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container/10 p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined">electric_rickshaw</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">BT-102</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">E-Trike Series X</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-green-100 text-green-700 font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                            Available
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/30">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Driver</p>
+<p class="font-body-md text-body-md font-semibold">Marco Rossi</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Battery</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500" style="font-variation-settings: 'FILL' 1;">battery_full</span>
+<span class="font-mono-data text-mono-data">94%</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Sector A-4</span>
+</div>
+<button class="text-secondary font-title-md text-body-md font-bold group-hover:underline">View Details</button>
+</div>
+</div>
+<!-- Unit Card 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-all duration-200 group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container/10 p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined">electric_rickshaw</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">BT-115</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Cargo-Link V2</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                            Busy
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/30">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Driver</p>
+<p class="font-body-md text-body-md font-semibold">Sarah Jenkins</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Battery</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">battery_horiz_050</span>
+<span class="font-mono-data text-mono-data">52%</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">navigation</span>
+<span class="font-body-md text-body-md">In Route</span>
+</div>
+<button class="text-secondary font-title-md text-body-md font-bold group-hover:underline">Track Unit</button>
+</div>
+</div>
+<!-- Unit Card 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-all duration-200 group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container/10 p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined">electric_rickshaw</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">BT-089</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">E-Trike Series X</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-red-100 text-red-700 font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                            Critical
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/30">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Driver</p>
+<p class="font-body-md text-body-md font-semibold">David Chen</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Battery</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500" style="font-variation-settings: 'FILL' 1;">battery_alert</span>
+<span class="font-mono-data text-mono-data">12%</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">ev_station</span>
+<span class="font-body-md text-body-md">Returning to Base</span>
+</div>
+<button class="text-error font-title-md text-body-md font-bold group-hover:underline">Call Driver</button>
+</div>
+</div>
+<!-- Unit Card 4 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-all duration-200 group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container/10 p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined">electric_rickshaw</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">BT-124</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">E-Trike Series X</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-green-100 text-green-700 font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                            Available
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/30">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Driver</p>
+<p class="font-body-md text-body-md font-semibold">Lucia Mendez</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Battery</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500" style="font-variation-settings: 'FILL' 1;">battery_full</span>
+<span class="font-mono-data text-mono-data">88%</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-body-md text-body-md">Sector B-2</span>
+</div>
+<button class="text-secondary font-title-md text-body-md font-bold group-hover:underline">View Details</button>
+</div>
+</div>
+<!-- Unit Card 5 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm border border-outline-variant hover:shadow-md transition-all duration-200 group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container/10 p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined">electric_rickshaw</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">BT-108</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Cargo-Link V2</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                            Busy
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/30">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Driver</p>
+<p class="font-body-md text-body-md font-semibold">James Wilson</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Battery</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500" style="font-variation-settings: 'FILL' 1;">battery_full</span>
+<span class="font-mono-data text-mono-data">76%</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">navigation</span>
+<span class="font-body-md text-body-md">In Route</span>
+</div>
+<button class="text-secondary font-title-md text-body-md font-bold group-hover:underline">Track Unit</button>
+</div>
+</div>
+<!-- Unit Card 6 (Charging State) -->
+<div class="bg-surface-container p-5 rounded-xl shadow-sm border border-outline-variant opacity-80">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="bg-outline-variant p-2 rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined">ev_station</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-primary">BT-044</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">E-Trike Series X</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                            Charging
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant/30">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Station</p>
+<p class="font-body-md text-body-md font-semibold">Hub North-1</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Charging</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary animate-pulse" style="font-variation-settings: 'FILL' 1;">battery_charging_80</span>
+<span class="font-mono-data text-mono-data">44%</span>
+</div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span class="font-body-md text-body-md">Ready in 45m</span>
+</div>
+<button class="text-on-surface-variant font-title-md text-body-md font-bold cursor-not-allowed">Offline</button>
+</div>
+</div>
+</section>
+<!-- Quick Stats Summary -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4">
+<div class="bg-secondary-container text-on-secondary-container p-6 rounded-xl">
+<p class="font-label-sm text-label-sm uppercase tracking-wide opacity-80">Active Units</p>
+<h4 class="text-[32px] font-bold mt-1">42 / 50</h4>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
+<p class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Fleet Health</p>
+<h4 class="text-[32px] font-bold mt-1 text-green-600">98%</h4>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
+<p class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Avg Battery</p>
+<h4 class="text-[32px] font-bold mt-1 text-primary">74%</h4>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
+<p class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant">Incidents</p>
+<h4 class="text-[32px] font-bold mt-1 text-error">0</h4>
+</div>
+</section>
+</div>
+</main>
+</body></html>

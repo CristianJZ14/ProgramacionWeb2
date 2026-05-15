@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fleet Control - Dispatch &amp; Alerts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#dec29a",
+                    "surface-dim": "#dcd9db",
+                    "outline": "#76777d",
+                    "on-secondary-container": "#fefcff",
+                    "primary": "#000000",
+                    "background": "#fcf8fa",
+                    "on-primary-fixed": "#131b2e",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#7c839b",
+                    "on-tertiary-fixed": "#271901",
+                    "outline-variant": "#c6c6cd",
+                    "secondary-container": "#316bf3",
+                    "surface-bright": "#fcf8fa",
+                    "surface": "#fcf8fa",
+                    "tertiary": "#000000",
+                    "primary-fixed-dim": "#bec6e0",
+                    "inverse-surface": "#303032",
+                    "primary-container": "#131b2e",
+                    "surface-container": "#f0edef",
+                    "surface-container-high": "#eae7e9",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#dbe1ff",
+                    "tertiary-fixed": "#fcdeb5",
+                    "on-tertiary-container": "#98805d",
+                    "inverse-on-surface": "#f3f0f2",
+                    "on-background": "#1b1b1d",
+                    "tertiary-container": "#271901",
+                    "primary-fixed": "#dae2fd",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "inverse-primary": "#bec6e0",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#00174b",
+                    "on-tertiary-fixed-variant": "#574425",
+                    "surface-tint": "#565e74",
+                    "on-secondary-fixed-variant": "#003ea8",
+                    "on-surface": "#1b1b1d",
+                    "secondary": "#0051d5",
+                    "surface-variant": "#e4e2e4",
+                    "surface-container-low": "#f6f3f5",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#45464d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "container-max": "1440px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "32px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Inter"],
+                    "mono-data": ["Inter"],
+                    "title-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcf8fa;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background">
+<!-- NavigationDrawer Shell -->
+<aside class="w-[280px] h-full fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest shadow-sm flex flex-col py-4 gap-2 z-50">
+<div class="px-6 mb-8">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-on-primary-fixed">Fleet Control</h1>
+<div class="mt-6 flex items-center gap-3">
+<img alt="Dispatcher Profile" class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of a corporate dispatcher in a modern office environment. The lighting is bright and clean with a soft bokeh background of a high-tech control room. The color palette is composed of cool blues and sharp whites, reflecting a corporate and authoritative tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChAxXHWyFzxsyjHH9Izq-XVyvDfS6Kb_T84vX1VyXkQ9IFlmNGstwBYm4Rz5RQZ7TOr5qabfXyGm5-zXgo91DZVqkKOImcjxxVMI5-ZNYuFRlDsIwzbkboQ1ZqcylfP4mXOSxOhpgF6fiifySZCZ_h3tlLNFN_rwjy6bUaYZihQ7BBtTFGNtrz7uUJZQ5OCYDvGayWir2jAcqwxxvPvwhMc5sVOsMEp7g1PsqiM-ejfms1qnnKNCFyuqxnwqqKmQlKx3XRyt9d71GN"/>
+<div>
+<p class="font-title-md text-title-md text-primary">Central Dispatch</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Shift Alpha-1</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors duration-200">
+<span class="material-symbols-outlined">map</span>
+<span class="font-title-md text-title-md">Real-time Map</span>
+</div>
+<div class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors duration-200">
+<span class="material-symbols-outlined">electric_rickshaw</span>
+<span class="font-title-md text-title-md">Fleet Inventory</span>
+</div>
+<div class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors duration-200">
+<span class="material-symbols-outlined">history</span>
+<span class="font-title-md text-title-md">Route History</span>
+</div>
+<div class="bg-secondary-container dark:bg-secondary-fixed text-on-secondary-container dark:text-on-secondary-fixed rounded-lg mx-2 flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+<span class="font-title-md text-title-md">Dispatch Center</span>
+</div>
+<div class="text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors duration-200">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-title-md text-title-md">Settings</span>
+</div>
+</nav>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-[280px] min-h-screen">
+<!-- TopAppBar Shell -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant flex justify-between items-center w-full px-margin-desktop h-16 sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container dark:hover:bg-surface-container-highest p-2 rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined text-primary dark:text-on-primary-fixed">menu</span>
+</button>
+<h2 class="font-headline-lg text-headline-lg font-black text-primary dark:text-on-primary-fixed">Dispatch &amp; Alerts</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex bg-surface-container-high px-4 py-1.5 rounded-full border border-outline-variant items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface">System Online</span>
+</div>
+<button class="hover:bg-surface-container dark:hover:bg-surface-container-highest p-2 rounded-full transition-transform active:scale-95">
+<span class="material-symbols-outlined text-primary dark:text-on-primary-fixed">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-margin-desktop">
+<!-- Control Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div>
+<h3 class="font-headline-xl text-headline-xl text-on-background">Operational Stream</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Live updates and urgent service demands</p>
+</div>
+<!-- Toggle Component -->
+<div class="bg-surface-container-high p-1 rounded-xl flex border border-outline-variant">
+<button class="px-6 py-2 rounded-lg bg-surface-container-lowest shadow-sm text-primary font-title-md text-title-md transition-all">
+                        Active Alerts
+                    </button>
+<button class="px-6 py-2 rounded-lg text-on-surface-variant font-title-md text-title-md hover:text-primary transition-all">
+                        History
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout for Dispatch Center -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Left Column: High Priority Alerts -->
+<div class="col-span-12 lg:col-span-7 space-y-4">
+<div class="flex items-center justify-between px-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Critical Alerts</span>
+<span class="font-label-sm text-label-sm text-error bg-error-container px-2 py-0.5 rounded-full">3 Urgent</span>
+</div>
+<!-- Critical Alert Card -->
+<div class="bg-white border-l-4 border-error shadow-sm rounded-xl p-5 hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="bg-error-container p-3 rounded-full h-fit">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">battery_alert</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-error">Low Battery - BT-05</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Unit current charge at 8%. Immediate recharge required at Station Alpha.</p>
+<div class="flex gap-4 mt-4">
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">bolt</span> Reroute to Charging
+                                        </button>
+<button class="border border-outline-variant px-4 py-2 rounded-lg font-label-sm text-label-sm hover:bg-surface-container transition-colors">Dismiss</button>
+</div>
+</div>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface-variant">02m ago</span>
+</div>
+</div>
+<!-- Critical Alert Card -->
+<div class="bg-white border-l-4 border-error shadow-sm rounded-xl p-5 hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="bg-error-container p-3 rounded-full h-fit">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">report</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-error">Collision Detected - RU-22</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">G-Force impact detected at intersection of 5th &amp; Broadway. Contacting driver...</p>
+<div class="flex gap-4 mt-4">
+<button class="bg-error text-on-error px-4 py-2 rounded-lg font-label-sm text-label-sm hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">call</span> Emergency Call
+                                        </button>
+<button class="border border-outline-variant px-4 py-2 rounded-lg font-label-sm text-label-sm hover:bg-surface-container transition-colors">View Map</button>
+</div>
+</div>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface-variant">05m ago</span>
+</div>
+</div>
+<!-- System Feed Section -->
+<div class="mt-12 pt-8">
+<span class="font-label-sm text-label-sm text-on-surface-variant px-2 uppercase tracking-wider">System Feed</span>
+<div class="mt-4 space-y-2">
+<div class="bg-surface-container-low border border-outline-variant p-4 rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary">update</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Software Update Complete</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Fleet-wide firmware v4.2.1 successfully deployed.</p>
+</div>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface-variant">12m</span>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-4 rounded-xl flex items-center justify-between hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-tertiary-container">info</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Shift Handover Log</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Lead Dispatcher Marcus signed off. Alpha-1 active.</p>
+</div>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface-variant">25m</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Service Requests & Map Insight -->
+<div class="col-span-12 lg:col-span-5 space-y-6">
+<!-- Service Requests Section -->
+<div class="bg-surface-container-high rounded-2xl p-6 border border-outline-variant">
+<div class="flex items-center justify-between mb-6">
+<h4 class="font-headline-lg text-headline-lg text-primary">Service Requests</h4>
+<span class="bg-primary text-on-primary px-2 py-0.5 rounded-lg font-mono-data text-[12px]">8 PENDING</span>
+</div>
+<div class="space-y-4">
+<!-- Request Card -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-secondary transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary font-bold">PREMIUM RIDE</span>
+<span class="font-title-md text-title-md text-on-background">SR-99210</span>
+</div>
+<div class="text-right">
+<p class="font-mono-data text-mono-data text-on-surface">14:20 PM</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Pickup in 5m</p>
+</div>
+</div>
+<div class="space-y-2 mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">location_on</span>
+<p class="font-body-md text-body-md text-on-surface truncate">742 Evergreen Terrace, Downtown</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">sports_score</span>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">International Airport (Terminal 2)</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-secondary text-on-secondary py-2 rounded-lg font-title-md text-title-md hover:opacity-90 transition-opacity">Assign Driver</button>
+<button class="w-12 h-10 border border-outline-variant rounded-lg flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Request Card 2 -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-transparent hover:border-secondary transition-all group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-tertiary-container font-bold">STANDARD</span>
+<span class="font-title-md text-title-md text-on-background">SR-99211</span>
+</div>
+<div class="text-right">
+<p class="font-mono-data text-mono-data text-on-surface">14:35 PM</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Pickup in 20m</p>
+</div>
+</div>
+<div class="space-y-2 mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">location_on</span>
+<p class="font-body-md text-body-md text-on-surface truncate">Westside Tech Plaza, Bldg C</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-2 rounded-lg font-title-md text-title-md hover:opacity-90 transition-opacity">Assign Driver</button>
+<button class="w-12 h-10 border border-outline-variant rounded-lg flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border-2 border-dashed border-outline-variant rounded-xl font-title-md text-title-md text-on-surface-variant hover:text-primary hover:border-primary transition-all">
+                            View All Requests (6 more)
+                        </button>
+</div>
+<!-- Interactive Map Preview -->
+<div class="relative h-64 rounded-2xl overflow-hidden shadow-sm border border-outline-variant group">
+<img class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700" data-alt="A stylized aerial satellite map view of a metropolitan city grid with glowing data points representing a fleet of vehicles moving through the streets. The map is designed with a dark, professional tech aesthetic, using shades of deep navy and charcoal gray, with vibrant electric blue and urgent red highlights for vehicle statuses." data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpc4tW5feFfQ5XNidu1o5IG8kcRA0roBbF_vbJFAKUpetNRC-jWClr1BgDUK6QFIlm4uvrxNuT23uhMtrQRfsn0H0C1pcCJG-etpY4mQx4WGSd6m7GgM20MRGHH7A7B5O-B07IBsWUUB5ZDWz0_5J_rPYtGTOlSYRP7hXmiobXJ7q4bMvLzADZRgoX4Kw5Br0QzARh1-Wc6AFNfgLZtsyuM-Dr3EHdN9EqiHeyTQg1NJmEzmM3Uq5llQtH8YJljTdR5Avb01nFU1ko"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<div>
+<p class="text-white font-headline-lg text-headline-lg">Live Map Insight</p>
+<p class="text-secondary-fixed font-body-md text-body-md">42 Units Active in Central District</p>
+</div>
+<button class="bg-white text-primary p-3 rounded-full shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">open_in_full</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

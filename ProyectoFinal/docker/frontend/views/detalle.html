@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Unit Detail View - BT-102</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#dec29a",
+                        "surface-dim": "#dcd9db",
+                        "outline": "#76777d",
+                        "on-secondary-container": "#fefcff",
+                        "primary": "#000000",
+                        "background": "#fcf8fa",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#7c839b",
+                        "on-tertiary-fixed": "#271901",
+                        "outline-variant": "#c6c6cd",
+                        "secondary-container": "#316bf3",
+                        "surface-bright": "#fcf8fa",
+                        "surface": "#fcf8fa",
+                        "tertiary": "#000000",
+                        "primary-fixed-dim": "#bec6e0",
+                        "inverse-surface": "#303032",
+                        "primary-container": "#131b2e",
+                        "surface-container": "#f0edef",
+                        "surface-container-high": "#eae7e9",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "secondary-fixed": "#dbe1ff",
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-tertiary-container": "#98805d",
+                        "inverse-on-surface": "#f3f0f2",
+                        "on-background": "#1b1b1d",
+                        "tertiary-container": "#271901",
+                        "primary-fixed": "#dae2fd",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#bec6e0",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#00174b",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "surface-tint": "#565e74",
+                        "on-secondary-fixed-variant": "#003ea8",
+                        "on-surface": "#1b1b1d",
+                        "secondary": "#0051d5",
+                        "surface-variant": "#e4e2e4",
+                        "surface-container-low": "#f6f3f5",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#45464d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "container-max": "1440px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Inter"],
+                        "mono-data": ["Inter"],
+                        "title-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcf8fa;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Sidebar (NavigationDrawer) -->
+<aside class="w-[280px] h-full fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest shadow-sm flex flex-col py-4 gap-2 hidden md:flex">
+<div class="px-6 py-4">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-on-primary-fixed">Fleet Control</h1>
+</div>
+<div class="flex items-center gap-3 px-6 py-4 mb-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">account_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Central Dispatch</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Shift Alpha-1</span>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-title-md text-title-md">Real-time Map</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 bg-secondary-container dark:bg-secondary-fixed text-on-secondary-container dark:text-on-secondary-fixed rounded-lg mx-2" href="#">
+<span class="material-symbols-outlined">electric_rickshaw</span>
+<span class="font-title-md text-title-md">Fleet Inventory</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-title-md text-title-md">Route History</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-title-md text-title-md">Dispatch Center</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant dark:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg mx-2 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-title-md text-title-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-[280px] min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container dark:hover:bg-surface-container-highest p-2 rounded-full active:scale-95 transition-transform md:hidden">
+<span class="material-symbols-outlined text-primary dark:text-on-primary-fixed">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<button class="hover:bg-surface-container dark:hover:bg-surface-container-highest p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant">arrow_back</span>
+</button>
+<h2 class="font-headline-lg text-headline-lg font-black text-primary dark:text-on-primary-fixed">BT-102</h2>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden sm:flex items-center gap-2 bg-surface-container px-3 py-1 rounded-full">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="font-label-sm text-label-sm text-on-surface">Active</span>
+</div>
+<button class="hover:bg-surface-container dark:hover:bg-surface-container-highest p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-on-primary-fixed">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-gutter md:p-margin-desktop space-y-gutter max-w-7xl mx-auto">
+<!-- Bento Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Main Status Card -->
+<div class="md:col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Operator Information</span>
+<div class="mt-4 flex items-center gap-4">
+<img alt="Operator" class="w-16 h-16 rounded-full object-cover grayscale" data-alt="A professional headshot of a smiling male transit operator in a modern navy blue uniform. The lighting is soft and studio-quality, emphasizing clarity and trust. The background is a clean, minimalist gray, maintaining a corporate and professional aesthetic that aligns with a high-tech logistics platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAchs6A7PU2s10KWAcZGzIlizz0uCRk_UFO4FgMF1-wRfBQ3669jprJwYWIL5gVk75RBjrKF__OUXLFS0kQj8HFn_EFhiq_8nLMEhD4pxm1oVYnmKz6hiP4YMB1mSFn8PElVzyKpiP1kOB6kc7HRUNIGPBQBleq559rCahS7PlhbXNLu8g1X2BWS2yYCGQP1geEzbHi4jiIiZy_46VTvKnSvpufaCSlVl6BlOGpBgQgKMSKEWOmQMfPKZUyeZ2yohvq9YO1_QaD4FiD"/>
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Marcus Vance</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Senior Driver • Tier 1 Urban Specialist</p>
+</div>
+</div>
+</div>
+<div class="mt-8 flex gap-4">
+<button class="flex-1 bg-secondary text-on-secondary py-3 px-6 rounded-lg font-title-md text-title-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">chat</span>
+                            Contact Driver
+                        </button>
+<button class="p-3 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Battery Stat Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col items-center justify-center text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-2">BATTERY LEVEL</span>
+<div class="relative w-24 h-24 mb-4 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-high" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="37.68" stroke-width="8"></circle>
+</svg>
+<span class="absolute font-headline-lg text-headline-lg text-on-surface">85%</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant">Estimated 3.5h remaining</span>
+</div>
+<!-- Active Duration Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">SHIFT DURATION</span>
+<div class="mt-4">
+<div class="font-headline-xl text-headline-xl text-on-surface leading-none">06:14:22</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Started 07:30 AM</p>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[75%]"></div>
+</div>
+</div>
+</div>
+<!-- Detailed Section Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Map Section (Today's Route) -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant overflow-hidden flex flex-col">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Today's Route History</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Total Distance: 24.8 km</p>
+</div>
+<button class="flex items-center gap-2 text-secondary font-label-sm text-label-sm hover:underline">
+<span class="material-symbols-outlined text-[20px]">fullscreen</span>
+                            Expand Map
+                        </button>
+</div>
+<div class="h-[400px] w-full bg-surface-container relative">
+<img alt="Route Map" class="w-full h-full object-cover opacity-60 grayscale" data-alt="A detailed aerial view of a clean, modern city street map with sharp vector-style navigation lines. A glowing blue path illustrates a transit route through a dense urban grid. The aesthetic is professional and technical, utilizing a high-contrast palette of deep greys, slate blues, and bright accent lines to indicate motion and logistics data." data-location="Barcelona, Spain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU7nXGBzRE7opMDwk8sDvKobYaAjhc7IuNsXzOQI-LU0OKv5eu9nkgqiX-eKFYyDddp9dBWU7bDwO34VzqPgPO7PkTQ3AvjtPziskWVm_-55QSgc_8sjqOhrcO32WW8Nb84tm2ukQcipveD_346HD_NWnVMZY3w1wUvuFnXYD_V6TToXGcJCaBFzgmASP0_AbPLyKfQohJ734Zu4X6WgIsvNJqgiaabEEJJYxqnRnBhFojLNpj5TokjhfzfV_q3uEuXEPpwsdss2IQ"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<!-- Simulated path overlay -->
+<svg class="w-full h-full absolute" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M10,80 Q30,20 50,50 T90,30" fill="none" stroke="#0051d5" stroke-dasharray="1,1" stroke-width="0.5"></path>
+</svg>
+<div class="absolute top-[30%] left-[90%] w-6 h-6 bg-secondary border-2 border-white rounded-full shadow-lg flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Metrics Sidebar -->
+<div class="space-y-gutter">
+<!-- Efficiency Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant mb-6 uppercase tracking-widest">Efficiency Metrics</h4>
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<span class="font-body-md text-body-md text-on-surface-variant block">Avg Speed</span>
+<span class="font-title-md text-title-md text-on-surface">12.4 km/h</span>
+</div>
+<span class="font-mono-data text-mono-data text-green-600">+2% vs fleet avg</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<span class="font-body-md text-body-md text-on-surface-variant block">Idle Time</span>
+<span class="font-title-md text-title-md text-on-surface">14 min</span>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface-variant">Low Activity</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<span class="font-body-md text-body-md text-on-surface-variant block">Trip Completions</span>
+<span class="font-title-md text-title-md text-on-surface">18</span>
+</div>
+<span class="font-mono-data text-mono-data text-secondary">On Track</span>
+</div>
+</div>
+</div>
+<!-- Health Check Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant mb-4 uppercase tracking-widest">Health &amp; Telemetry</h4>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Brake Pressure Nominal</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Tire PSI (Front: 42, Rear: 45)</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-yellow-500">warning</span>
+<span class="font-body-md text-body-md text-on-surface">Chain Tension Check (Next 48h)</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) - For focus task alignment -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-secondary text-on-secondary rounded-full shadow-lg flex items-center justify-center hover:shadow-xl active:scale-95 transition-all md:hidden">
+<span class="material-symbols-outlined">chat</span>
+</button>
+</body></html>
